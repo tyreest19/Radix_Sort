@@ -11,6 +11,4 @@
 #include <string>
 const int MAX_CONSTANT = 100;
 const int NUMBER_OF_BINS = 9;
-const std::string FILE_NAME = "intergers.txt";
-
 #endif /* constants_h */

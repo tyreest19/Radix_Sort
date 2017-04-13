@@ -77,54 +77,89 @@ int Store_Numbers_Into_Array(int array[], string file_name)
 // Stores numbers by siginficant digits
 //=========================================================================================
 
-void Radix_Sort(int array[], int n)
+void Radix_Sort(int array[], int amount_of_numbers)
 {
-    // Find the maximum number to know number of digits
-    int m = Find_Largest_Number(array, n);
-    
-    // Do counting sort for every digit. Note that instead
-    // of passing digit number, exp is passed. exp is 10^i
-    // where i is current digit number
-    for (int exp = 1; m/exp > 0; exp *= 10)
-        Count_Sort(array, n, exp);
-}
-
-//=========================================================================================
-// Get max number
-//=========================================================================================
-
-int Find_Largest_Number(int array[], int amount_of_numbers)
-{
-    int largest_number = array[0];
-    for (int i = 1; i < amount_of_numbers; i++)
-        if (array[i] > largest_number)
-            largest_number = array[i];
-    return largest_number;
+    //Find the maximum number to know number of digits
+    int amount_of_digits = Amount_Of_Digits(array, amount_of_numbers);
+//
+//    // Do counting sort for every digit. Note that instead
+//    // of passing digit number, exp is passed. exp is 10^i
+//    // where i is current digit number
+    for (int digit = 1; amount_of_numbers/digit > 0; digit *= 10)
+        Count_Sort(array, amount_of_numbers, digit);
 }
 
 void Count_Sort(int array[], int amount_of_numbers, int exp)
 {
     int output[amount_of_numbers]; // output array
-    int i, count[10] = {0};
+    int i;
+    Bin bins[10];
     
-    // Store count of occurrences in count[]
-    for (i = 0; i < amount_of_numbers; i++)
-        count[ (array[i]/exp)%10 ]++;
     
-    // Change count[i] so that count[i] now contains actual
-    //  position of this digit in output[]
-    for (i = 1; i < 10; i++)
-        count[i] += count[i - 1];
+//    // Store count of occurrences in count[]
+//    for (i = 0; i < amount_of_numbers; i++)
+//        count[ (array[i]/exp)%10 ]++;
+//    
+//    // Change count[i] so that count[i] now contains actual
+//    //  position of this digit in output[]
+//    for (i = 1; i < 10; i++)
+//        count[i] += count[i - 1];
+//    
+//    // Build the output array
+//    for (i = amount_of_numbers - 1; i >= 0; i--)
+//    {
+//        output[count[ (array[i]/exp)%10 ] - 1] = array[i];
+//        count[ (array[i]/exp)%10 ]--;
+//    }
+//    
+//    // Copy the output array to arr[], so that arr[] now
+//    // contains sorted numbers according to current digit
+//    for (i = 0; i < amount_of_numbers; i++)
+//        array[i] = output[i];
+}
+
+//=========================================================================================
+// Make user user enters a valid number
+//=========================================================================================
+
+int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds)
+{
+    int number = -1;
+    string user_entered_number;
     
-    // Build the output array
-    for (i = amount_of_numbers - 1; i >= 0; i--)
+    while (number == -1 || (number < lower_bounds || number > upper_bounds))
     {
-        output[count[ (array[i]/exp)%10 ] - 1] = array[i];
-        count[ (array[i]/exp)%10 ]--;
+        cout << prompt;
+        getline(cin, user_entered_number);
+        number = String_To_Int(user_entered_number.c_str());
+        cout << "\n";
+        if (number == -1)
+        {
+            cout << invalid_prompt << "\n\n";
+        }
+        
+        else if (number < lower_bounds || number > upper_bounds)
+        {
+            cout << out_of_bounds_prompt << "\n";
+        }
     }
     
-    // Copy the output array to arr[], so that arr[] now
-    // contains sorted numbers according to current digit
-    for (i = 0; i < amount_of_numbers; i++)
-        array[i] = output[i];
+    return number;
+}
+
+//=========================================================================================
+// Returns largest amount of digits in an array of numbers
+//=========================================================================================
+
+int Amount_Of_Digits(int array[], int array_size)
+{
+    int max_digits = to_string(array[0]).length();
+    for (int i = 1; i < array_size - 1; i++)
+    {
+        if (to_string(array[i]).length() > max_digits)
+        {
+            max_digits = to_string(array[i]).length();
+        }
+    }
+    return max_digits;
 }
