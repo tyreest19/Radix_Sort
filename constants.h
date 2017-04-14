@@ -10,5 +10,5 @@
 #define constants_h
 #include <string>
 const int MAX_CONSTANT = 100;
-const int NUMBER_OF_BINS = 9;
+const int NUMBER_OF_BINS = 10;
 #endif /* constants_h */

@@ -15,15 +15,20 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     int numbers[MAX_CONSTANT];
-    bool ascending_order;
+    bool ascending_order = true;
     string file_name;
     
     cout << "This is a program reads a file of spaced numbers and sorts them by sigificant digits\n";
-    cout << "Enter the filename: ";
-    getline(cin,file_name);
+//    cout << "Enter the filename: ";
+//    getline(cin,file_name);
     
-    int amount_of_numbers = Store_Numbers_Into_Array(numbers, file_name);
-    cout << "Choose a display option for the numbers\n0) Descending Order\n1)Ascending Order\n";
+    int amount_of_numbers = Store_Numbers_Into_Array(numbers, "intergers.txt");
+    for (int i = 0; i < amount_of_numbers; i++)
+    {
+        cout << numbers[i] << " ";
+    }
+    cout << "\n";
+    //cout << "Choose a display option for the numbers\n0) Descending Order\n1)Ascending Order\n";
     
 
     Radix_Sort(numbers, amount_of_numbers);
@@ -32,7 +37,7 @@ int main(int argc, const char * argv[]) {
     {
         for (int i = 0; i < amount_of_numbers; i++)
         {
-            cout << numbers[i] << endl;
+            cout << numbers[i] << " ";
         }
     }
     

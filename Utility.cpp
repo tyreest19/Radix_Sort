@@ -79,43 +79,41 @@ int Store_Numbers_Into_Array(int array[], string file_name)
 
 void Radix_Sort(int array[], int amount_of_numbers)
 {
-    //Find the maximum number to know number of digits
     int amount_of_digits = Amount_Of_Digits(array, amount_of_numbers);
-//
-//    // Do counting sort for every digit. Note that instead
-//    // of passing digit number, exp is passed. exp is 10^i
-//    // where i is current digit number
-    for (int digit = 1; amount_of_numbers/digit > 0; digit *= 10)
-        Count_Sort(array, amount_of_numbers, digit);
+    int sigfig = 10;
+    for (int i = 0; i < amount_of_digits; i++)
+    {
+        Count_Sort(array, amount_of_numbers, sigfig, amount_of_digits);
+        cout << "---------------- interation: " << i  << "\n";
+        sigfig *= 10;
+    }
 }
 
-void Count_Sort(int array[], int amount_of_numbers, int exp)
+void Count_Sort(int array[], int amount_of_numbers, int sigificant_digit, int amount_of_digits)
 {
     int output[amount_of_numbers]; // output array
-    int i;
-    Bin bins[10];
+    Bin bins[NUMBER_OF_BINS];
+    int counter = 0;
     
+    for (int i = 0; i < amount_of_numbers; i++)
+    {
+        cout << "bin number: " << (array[i] % sigificant_digit)/(sigificant_digit/10) << " number: " << array[i] << endl;
+        bins[(array[i] % sigificant_digit)/(sigificant_digit/10)].Push(array[i]);
+    }
     
-//    // Store count of occurrences in count[]
-//    for (i = 0; i < amount_of_numbers; i++)
-//        count[ (array[i]/exp)%10 ]++;
-//    
-//    // Change count[i] so that count[i] now contains actual
-//    //  position of this digit in output[]
-//    for (i = 1; i < 10; i++)
-//        count[i] += count[i - 1];
-//    
-//    // Build the output array
-//    for (i = amount_of_numbers - 1; i >= 0; i--)
-//    {
-//        output[count[ (array[i]/exp)%10 ] - 1] = array[i];
-//        count[ (array[i]/exp)%10 ]--;
-//    }
-//    
-//    // Copy the output array to arr[], so that arr[] now
-//    // contains sorted numbers according to current digit
-//    for (i = 0; i < amount_of_numbers; i++)
-//        array[i] = output[i];
+    for (int i = 0; i < NUMBER_OF_BINS; i++)
+    {
+        while (!bins[i].Is_Empty())
+        {
+            output[counter] = bins[i].Pop();
+            counter++;
+        }
+    }
+    
+    for (int i = 0; i < amount_of_numbers; i++)
+    {
+        array[i] = output[i];
+    }
 }
 
 //=========================================================================================
