@@ -84,7 +84,6 @@ void Radix_Sort(int array[], int amount_of_numbers)
     for (int i = 0; i < amount_of_digits; i++)
     {
         Count_Sort(array, amount_of_numbers, sigfig, amount_of_digits);
-        cout << "---------------- interation: " << i  << "\n";
         sigfig *= 10;
     }
 }
@@ -97,7 +96,6 @@ void Count_Sort(int array[], int amount_of_numbers, int sigificant_digit, int am
     
     for (int i = 0; i < amount_of_numbers; i++)
     {
-        cout << "bin number: " << (array[i] % sigificant_digit)/(sigificant_digit/10) << " number: " << array[i] << endl;
         bins[(array[i] % sigificant_digit)/(sigificant_digit/10)].Push(array[i]);
     }
     
