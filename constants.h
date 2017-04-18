@@ -10,6 +10,7 @@
 #define constants_h
 #include <string>
 const int MAX_CONSTANT = 1000;
+const int MAX_USER_INPUTTED_NUMBERS = 100;
 const int NUMBER_OF_BINS = 10;
 const std::string INVALID_NUMBER = "Please enter 0 or 1\n";
 const std::string PRINT_ORDER_MENU = "Choose a display option for the numbers\n0) Descending Order\n1)Ascending Order\nEnter Menu Option: ";

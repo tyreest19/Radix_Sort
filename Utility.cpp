@@ -165,13 +165,8 @@ int Amount_Of_Digits(int array[], int array_size)
 void Generate_Array_Of_Random_Numbers(int lower_bound, int upper_bound, int amount_of_numbers, int array[])
 {
     srand(0);
-    if (amount_of_numbers <= ((upper_bound - lower_bound) + 1))
+    for (int i = 0; i < amount_of_numbers; i++)
     {
-        for (int i = 0; i < amount_of_numbers; i++)
-        {
-            array[i] = lower_bound + (rand() % (upper_bound - lower_bound + 1));
-        }
+        array[i] = lower_bound + (rand() % (upper_bound - lower_bound + 1));
     }
-    else
-        cout << "The amount of numbers you've choosen are out of range ! \n\n";
 }
