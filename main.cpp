@@ -19,6 +19,7 @@ int main(int argc, const char * argv[]) {
     int counter = 0;
     int count_user_entered_numbers = 0;
     int temp;
+    int amount_of_numbers;
     string file_name;
     
     cout << "This is a program reads a file of spaced numbers and sorts them by sigificant digits\n";
@@ -33,13 +34,15 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    cout << "Enter the filename: ";
-    getline(cin,file_name);
-    cout << "\n";
+    if (menu_value == 1)
+    {
+        int lower_bound = User_Inputted_Number("Enter a lower bound: ", "Please enter a number from 0 to 1000: ", "Please enter a number from 0 to 1000: ", 0, 1000);
+        int upper_bound = User_Inputted_Number("Enter a upper bound: ", "Please enter a number from 0 to 1000: ", "Please enter a number from 0 to 1000: ", 0, 1000);;
+        amount_of_numbers = User_Inputted_Number("Enter amount of numbers: ", "Please enter a number from 0 to " + to_string(upper_bound - lower_bound) + ": ", "Please enter a number from 0 to " + to_string(upper_bound - lower_bound) + ": ", 0, upper_bound - lower_bound);
+        Generate_Array_Of_Random_Numbers(lower_bound, upper_bound, amount_of_numbers, numbers);
+    }
     
-    int amount_of_numbers = Store_Numbers_Into_Array(numbers, file_name);
     menu_value = User_Inputted_Number(PRINT_ORDER_MENU, INVALID_NUMBER, INVALID_NUMBER, 0, 1);
-    Radix_Sort(numbers, amount_of_numbers);
     
     cout << "\nOroginal List: \n\n";
     for (int i = 0; i < amount_of_numbers; i++)
@@ -55,7 +58,7 @@ int main(int argc, const char * argv[]) {
     }
     
     cout << "\n";
-    
+    Radix_Sort(numbers, amount_of_numbers);
     counter = 0;
     
     if(menu_value)
@@ -76,7 +79,7 @@ int main(int argc, const char * argv[]) {
     else
     {
         cout << "\nDescending Order: \n\n";
-        for (int i = amount_of_numbers; i >= 0; i--)
+        for (int i = amount_of_numbers - 1; i >= 0; i--)
         {
             cout << numbers[i] << " ";
             counter++;
