@@ -39,9 +39,12 @@ int main(int argc, const char * argv[]) {
     
     else if (menu_value == 1)
     {
-        int lower_bound = User_Inputted_Number("Enter a lower bound: ", "Please enter a number from 0 to 1000: ", "Please enter a number from 0 to 1000: ", 0, 1000);
-        int upper_bound = User_Inputted_Number("Enter a upper bound: ", "Please enter a number from 0 to 1000: ", "Please enter a number from 0 to 1000: ", 0, 1000);;
-        amount_of_numbers = User_Inputted_Number("Enter amount of numbers: ", "Please enter a number from 0 to  1000: ", "Please enter a number from 0 to  1000: ", 0,1000);
+        int lower_bound = User_Inputted_Number("Enter a lower bound: ", "Please enter a number from 0 to 1000: ", "Please enter a number from 0 to 1000: ", MINIMUM_CONSTANT, MAX_CONSTANT);
+        string lower_bound_string_represeantation;
+        String_To_Int(lower_bound_string_represeantation, lower_bound);
+        string upper_bound_error = "Please enter a number from" + lower_bound_string_represeantation + "0 to 1000: ";
+        int upper_bound = User_Inputted_Number("Enter a upper bound: ", upper_bound_error, upper_bound_error, lower_bound, MAX_CONSTANT);;
+        amount_of_numbers = User_Inputted_Number("Enter amount of numbers: ", "Please enter a number from 0 to  1000: ", "Please enter a number from 0 to  1000: ", MINIMUM_CONSTANT, MAX_CONSTANT);
         Generate_Array_Of_Random_Numbers(lower_bound, upper_bound, amount_of_numbers, numbers);
     }
     

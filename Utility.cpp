@@ -154,13 +154,19 @@ int Amount_Of_Digits(int array[], int array_size)
     int max_digits = to_string(array[0]).length();
     for (int i = 1; i < array_size - 1; i++)
     {
-        if (to_string(array[i]).length() > max_digits)
+        string number;
+        String_To_Int(number, array[i]);
+        if (number.length() > max_digits)
         {
-            max_digits = to_string(array[i]).length();
+            max_digits = number.length();
         }
     }
     return max_digits;
 }
+
+//=========================================================================================
+// Returns largest amount of digits in an array of numbers
+//=========================================================================================
 
 void Generate_Array_Of_Random_Numbers(int lower_bound, int upper_bound, int amount_of_numbers, int array[])
 {
@@ -169,4 +175,45 @@ void Generate_Array_Of_Random_Numbers(int lower_bound, int upper_bound, int amou
     {
         array[i] = lower_bound + (rand() % (upper_bound - lower_bound + 1));
     }
+}
+
+//=========================================================================================
+// Convert string to int and Int to string
+//=========================================================================================
+
+bool String_To_Int(const std::string& str, int& result)
+{
+    std::string::const_iterator i = str.begin();
+    
+    if (i == str.end())
+        return false;
+    
+    bool negative = false;
+    
+    if (*i == '-')
+    {
+        negative = true;
+        ++i;
+        
+        if (i == str.end())
+            return false;
+    }
+    
+    result = 0;
+    
+    for (; i != str.end(); ++i)
+    {
+        if (*i < '0' || *i > '9')
+            return false;
+        
+        result *= 10;
+        result += *i - '0';
+    }
+    
+    if (negative)
+    {
+        result = -result;
+    }
+    
+    return true;
 }
