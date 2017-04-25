@@ -81,7 +81,7 @@ int Store_Numbers_Into_Array(int array[], string file_name)
 
 void Radix_Sort(int array[], int amount_of_numbers)
 {
-    int amount_of_digits = Amount_Of_Digits(array, amount_of_numbers);
+    int amount_of_digits = Amount_Of_Digits(array, amount_of_numbers) + 1;
     int sigfig = 10;
     for (int i = 0; i < amount_of_digits; i++)
     {
